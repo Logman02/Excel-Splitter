@@ -5,6 +5,7 @@ from tkinter import font as tkfont
 from tkinter import StringVar, OptionMenu
 from openpyxl import load_workbook, Workbook
 
+
 # Function to handle the file selection
 def select_xlsx_file():
     global input_file, columns
@@ -16,12 +17,14 @@ def select_xlsx_file():
         columns = get_column_headers(input_file)
         update_column_dropdown()
 
+
 # Function to get column headers from the selected XLSX file
 def get_column_headers(file_path):
     workbook = load_workbook(file_path, read_only=True)
     sheet = workbook.active
     headers = [cell.value for cell in next(sheet.iter_rows(min_row=1, max_row=1))]
     return headers
+
 
 # Function to update the column dropdown menu
 def update_column_dropdown():
@@ -30,6 +33,7 @@ def update_column_dropdown():
         column_menu["menu"].delete(0, "end")  # Clear the current options
         for column in columns:
             column_menu["menu"].add_command(label=column, command=tk._setit(selected_column, column))
+
 
 # Function to split the XLSX file based on the selected column
 def split_xlsx():
@@ -66,6 +70,7 @@ def split_xlsx():
 
             output_label.config(text=f'Success! XLSX files split based on "{selected_column_value}".')
             output_label.pack(pady=10)  # Show the label
+
 
 # Create the main Tkinter window
 root = tk.Tk()
